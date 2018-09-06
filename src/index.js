@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch} from 'react-router-dom';
 import { Provider } from 'react-redux';
-import './index.css';
-import Register from './containers/Register/register';
+import MainPage from './views/MainPage/MainPage.jsx';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
@@ -11,7 +10,7 @@ ReactDOM.render(
 		<BrowserRouter>
 			<div>
 				<Switch>
-					<Route component={Register}></Route>
+					<Route component={MainPage}></Route>
 				</Switch>
 				
 			</div>
