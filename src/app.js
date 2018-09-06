@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import { BrowserRouter, Route, Switch} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'mobx-react';
-import MainPage from './views/MainPage/MainPage.jsx';
-import appState from './store/app.state';
+import App from './views/App';
+import AppState from './store/app-state';
+
+const initialState = window.__INITIAL__STATE__ || {}
 
 const root = document.getElementById('root')
 
 const render = (Component) =>{
     ReactDOM.hydrate(
         <AppContainer>
-            <Provider appState = {appState}>
+            <Provider appState = {new AppState(initialState.appState)}>
                 <BrowserRouter>
                     <Component/>
                 </BrowserRouter>
@@ -22,12 +24,12 @@ const render = (Component) =>{
 
 //服务端渲染warning
 // ReactDOM.hydrate(<MainPage />, root);
-render(MainPage)
+render(App)
 
 if (module.hot){
-    module.hot.accept('./views/MainPage/MainPage.jsx', ()=>{
-        const NextMainPage = require('./views/MainPage/MainPage.jsx').default
+    module.hot.accept('./views/App.jsx', ()=>{
+        const NextApp = require('./views/App.jsx').default
         // ReactDOM.hydrate(<NextMainPage />, root);
-        render(NextMainPage)
+        render(NextApp)
     })
 }
