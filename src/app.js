@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
+import { BrowserRouter, Route, Switch} from 'react-router-dom';
+import { Provider } from 'mobx-react';
 import MainPage from './views/MainPage/MainPage.jsx';
-import NextPage from './views/MainPage/NextPage.jsx';
+import appState from './store/app.state';
+
 const root = document.getElementById('root')
 
 const render = (Component) =>{
     ReactDOM.hydrate(
         <AppContainer>
-            <Component/>
+            <Provider appState = {appState}>
+                <BrowserRouter>
+                    <Component/>
+                </BrowserRouter>
+            </Provider>
         </AppContainer>,root
     )
 }
