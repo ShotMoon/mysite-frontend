@@ -13,20 +13,19 @@ import {
 import PropTypes from 'prop-types';
 import { AppState } from '../store/app-state';
 // core components
-import Header from "components/Header/Header";
-import Footer from "components/Footer/Footer";
-import GridContainer from "components/Grid/GridContainer";
-import GridItem from "components/Grid/GridItem";
-import Button from "components/CustomButtons/Button";
-import Parallax from "components/Parallax/Parallax";
-// sections for this page
-import HeaderLinks from "components/Header/HeaderLinks";
+import MyHeader from 'components/Header/MyHeader';
+import MyNavPills from 'components/NavPills/MyNavPills';
 
 
-import componentsStyle from "assets/jss/views/components";
+import componentsStyle from "assets/jss/material-kit-react/views/components";
+
+// Sections for this page
+
+
+const dashboardRoutes = [];
 
 // @inject('appState') @observer
-class Components extends React.Component {
+class App extends React.Component {
 
     asyncBootstrap() {
         return new Promise((resolve, reject) => {
@@ -35,42 +34,19 @@ class Components extends React.Component {
             })
         })
     }
-  render() {
-    const { classes, ...rest } = this.props;
-    
-    return (
-      <div>
-        <Header
-          brand="Material Kit React"
-          rightLinks={<HeaderLinks />}
-          fixed
-          color="transparent"
-          changeColorOnScroll={{
-            height: 400,
-            color: "white"
-          }}
-          {...rest}
-        />
-        <Parallax>
-          <div className={classes.container}>
-            <GridContainer>
-              <GridItem>
-                <div className={classes.brand}>
-                  <h1 className={classes.title}>Material Kit React.</h1>
-                  <h3 className={classes.subtitle}>
-                    A Badass Material-UI Kit based on Material Design.
-                  </h3>
-                </div>
-              </GridItem>
-            </GridContainer>
+    render() {
+        const { classes, ...rest } = this.props;
+        return (
+          <div>
+            <MyHeader />
+            <MyNavPills />
+            <div className={classNames(classes.main, classes.mainRaised)}>
+                
+                
+            </div>
           </div>
-        </Parallax>
-
-        
-        <Footer />
-      </div>
-    );
-  }
+        );
+      }
 }
 
-export default withStyles(componentsStyle)(Components);
+export default withStyles(componentsStyle)(App);

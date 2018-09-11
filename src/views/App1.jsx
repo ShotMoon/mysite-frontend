@@ -6,7 +6,9 @@ import {
 import PropTypes from 'prop-types';
 import { AppState } from '../store/app-state';
 import Helmet from 'react-helmet';
-import Card from 'components/Card/Card.jsx';
+import Header from 'components/Header/Header';
+import Cards from 'components/Cards/Cards';
+import bg from 'assets/img/bg.jpg';
 
 @inject('appState') @observer
 export default class MainPage extends React.Component{
@@ -36,8 +38,10 @@ export default class MainPage extends React.Component{
                     <title>app</title>
                     <meta name="desc" content="desccc"/>
                 </Helmet>
-                <input type="text" onChange={this.changeName} />
-                <span>{this.props.appState.msg}</span>
+                <Header />
+                <img src={bg} />
+                {/* <input type="text" onChange={this.changeName} />
+                <span>{this.props.appState.msg}</span> */}
             </div>
         )
     }
