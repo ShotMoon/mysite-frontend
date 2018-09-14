@@ -4,23 +4,45 @@ import {
     action,
     autorun
 } from 'mobx';
+import {post} from '../utils/http';
+import Qs from 'qs';
 
 export default class AppState {
-    constructor({ count, name} = { count: 0, name: 'alex'}){
-        this.count = count
-        this.name = name
+
+    @observable username
+    @observable password
+    @observable syncing = false
+    @observable user
+
+    constructor(username, password, syncing, user){
+        this.count = username
+        this.name = password
+        this.syncing = syncing
+        this.user = user
     }
-    @observable count
-    @observable name
+
     @computed get msg(){
         return `${this.name} say count is ${this.count}`
     }
-    @action add() {
-      this.count += 1
-    }
-    @action changeName(name) {
-      this.name = name
+
+    @action login(username, password) {  
+        let param = new URLSearchParams()
+        param.append('password', password)
+        return new Promise((resolve, reject)=>{
+            this.syncing = true
+            post(`/user/${username}`, param)
+                .then(res=>{
+                    this.user = res.data
+                    resolve()
+                }).catch(err => {
+                    reject(err)
+            })
+        })
     } 
+    @action getUserInfo(){
+        console.log(JSON.stringify(this.user)+'=-=-')
+        return this.user
+    }
     toJson() {
         return {
           count: this.count,

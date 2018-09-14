@@ -34,7 +34,7 @@ const getModuleFromString = (bundle, filename) => {
   return m
 }
 
-const mfs = new MemoryFs
+const mfs = new MemoryFs()
 const serverCompiler = webpack(serverConfig)
 serverCompiler.outputFileSystem = mfs
 let serverBundle

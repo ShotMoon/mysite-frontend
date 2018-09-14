@@ -6,18 +6,13 @@ import { Link } from "react-router-dom";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 // @material-ui/icons
-import {
-    observer,
-    inject
-} from 'mobx-react';
-import PropTypes from 'prop-types';
-import { AppState } from '../store/app-state';
+
 // core components
 import MyHeader from 'components/Header/MyHeader';
 import MyNavPills from 'components/NavPills/MyNavPills';
 
-
 import componentsStyle from "assets/jss/material-kit-react/views/components";
+import Routes from '../config/router';
 
 // Sections for this page
 
@@ -39,10 +34,8 @@ class App extends React.Component {
         return (
           <div>
             <MyHeader />
-            <MyNavPills />
             <div className={classNames(classes.main, classes.mainRaised)}>
-                
-                
+                <Routes key="routes" />
             </div>
           </div>
         );

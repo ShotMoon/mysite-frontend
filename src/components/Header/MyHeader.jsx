@@ -22,22 +22,29 @@ import image from "assets/img/bg.jpg";
 import profileImage from "assets/img/faces/avatar.jpg";
 import navbarsStyle from "assets/jss/material-kit-react/views/componentsSections/navbarsStyle";
 
+//mobx
+import { inject, observer } from 'mobx-react';
+
+@inject(stores => {
+  return { appState: stores.appState }
+})
+@observer
 class SectionNavbars extends React.Component {
   render() {
     const { classes } = this.props;
     return (
         <Header
-              brand="Navbar with profile"
+              brand="shotmoon"
               rightLinks={
                 <List className={classes.list}>
                   <ListItem className={classes.listItem}>
                     <Button
-                      href="#pablo"
+                      href="/login"
                       className={classes.navLink}
-                      onClick={e => e.preventDefault()}
+                      // onClick={e => e.preventDefault()}
                       color="transparent"
                     >
-                      Discover
+                      Login
                     </Button>
                   </ListItem>
                   <ListItem className={classes.listItem}>
@@ -47,19 +54,45 @@ class SectionNavbars extends React.Component {
                       onClick={e => e.preventDefault()}
                       color="transparent"
                     >
-                      Wishlist
+                      {this.props.appState.getUserInfo()}
                     </Button>
                   </ListItem>
                   <ListItem className={classes.listItem}>
                     <Button
+                      justIcon
+                      round
                       href="#pablo"
-                      className={classes.registerNavLink}
+                      className={classes.notificationNavLink}
                       onClick={e => e.preventDefault()}
                       color="rose"
-                      round
                     >
-                      Register
+                      <Email className={classes.icons} />
                     </Button>
+                  </ListItem>
+                  <ListItem className={classes.listItem}>
+                    <CustomDropdown
+                      left
+                      caret={false}
+                      hoverColor="black"
+                      dropdownHeader="Dropdown Header"
+                      buttonText={
+                        <img
+                          src={profileImage}
+                          className={classes.img}
+                          alt="profile"
+                        />
+                      }
+                      buttonProps={{
+                        className:
+                          classes.navLink + " " + classes.imageDropdownButton,
+                        color: "transparent"
+                      }}
+                      dropdownList={[
+                        "Me",
+                        "Settings and other stuff",
+                        "Sign out"
+                      ]}
+                    />
                   </ListItem>
                 </List>
               }

@@ -10,6 +10,9 @@ const pillsStyle = {
     marginTop: "30px",
     minHeight: "32px",
     textDecoration: "none"
+  },
+  whole: {
+    padding: "5px",
   }
 };
 

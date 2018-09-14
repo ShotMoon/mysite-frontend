@@ -134,5 +134,6 @@
     "rimraf": "^2.6.2",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.7"
-  }
+  },
+  "proxy": "http://localhost:8080"
 }

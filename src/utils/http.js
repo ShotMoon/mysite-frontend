@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = process.env.API_BASE || ''
+const baseUrl = process.env.API_BASE || 'http://localhost:8080'
 
 const queryString = (url, json) => {
   const str = Object.keys(json).reduce((result, key) => {
@@ -12,7 +12,8 @@ const queryString = (url, json) => {
 
 export const get = (url, params) => {
   return new Promise((resolve, reject) => {
-    axios.get(queryString(`${baseUrl}/api${url}`, params))
+    console.log(`${baseUrl}---------------`)
+    axios.get(queryString(`${baseUrl}${url}`, params))
       .then(resp => {
         resolve(resp.data)
       }).catch(reject)
@@ -21,7 +22,7 @@ export const get = (url, params) => {
 
 export const post = (url, data) => {
   return new Promise((resolve, reject) => {
-    axios.post(`${baseUrl}/api${url}`, data)
+    axios.post(`${baseUrl}${url}`, data)
       .then(resp => {
         resolve(resp.data)
       })
@@ -30,6 +31,6 @@ export const post = (url, data) => {
 }
 
 export default {
-  get,
+  get, post
 }
 

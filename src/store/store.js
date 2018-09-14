@@ -1,6 +1,7 @@
-import AppStateClass from './app-state'
+import AppState from './app-state';
+import {ArticleStore} from './article-store';
 
-export const AppState = AppStateClass
+export { AppState, ArticleStore }
 
 export default {
   AppState,
@@ -10,5 +11,6 @@ export default {
 export const createStoreMap = () => {
   return {
     appState: new AppState(),
+    articleStore: new ArticleStore()
   }
 }
