@@ -6,7 +6,7 @@ class MainPage extends React.Component{
     render(){
         return(
             <div>
-                <MyNavPills />
+                <MyNavPills history={this.props.history} />
             </div>
         )
     }

@@ -38,6 +38,10 @@ class MyNavPills extends React.Component {
         this.props.articleStore.fetchArticles({})
     }
 
+    toDetail(article) {
+        this.props.history.push(`/detail/${article.id}`)
+    }
+
 
   render() {
     const { classes } = this.props;
@@ -53,7 +57,7 @@ class MyNavPills extends React.Component {
                     tabIcon: Dashboard,
                     tabContent: (
                         articles.map(article => 
-                            (<Card className={classes.card}>
+                            (<Card className={classes.card} onClick={()=>{this.toDetail(article)}}>
                                 <CardActionArea>
                                     <CardMedia
                                         className={classes.media}

@@ -64,11 +64,9 @@ export class ArticleStore {
                 //     this.syncing = false
                 //     reject()
                 //   }
-                    console.log('.........')
                     const articles = res.data.content.map(article => {
                       return new Article(createArticle(article))
                     })
-                    console.log("aaaa"+JSON.stringify(articles))
                     this.articles = articles
                     this.syncing = false
                     resolve()
@@ -76,6 +74,20 @@ export class ArticleStore {
                   reject(err)
                 })
               }
+          })
+      }
+
+      @computed get detailsMap() {
+        return this.articles.reduce((result, article) => {
+            result[article.id] = article
+            return result
+        }, {})
+      }
+
+      @action
+      getComents() {
+          return new Promise(() => {
+              //TODO
           })
       }
 }
