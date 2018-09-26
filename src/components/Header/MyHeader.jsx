@@ -30,8 +30,12 @@ import { inject, observer } from 'mobx-react';
 })
 @observer
 class SectionNavbars extends React.Component {
+  getInfo(){
+    this.props.appState.getUserInfo();
+  }
   render() {
     const { classes } = this.props;
+    const user = this.props.appState.user;
     return (
         <Header
               brand="shotmoon"
@@ -51,10 +55,11 @@ class SectionNavbars extends React.Component {
                     <Button
                       href="#pablo"
                       className={classes.navLink}
-                      onClick={e => e.preventDefault()}
+                      // onClick={e => e.preventDefault()}
+                      onClick={()=>this.getInfo()}
                       color="transparent"
                     >
-                      {this.props.appState.getUserInfo()}
+                      Hello,{user?user.username:'请登录'}
                     </Button>
                   </ListItem>
                   <ListItem className={classes.listItem}>

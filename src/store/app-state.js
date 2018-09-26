@@ -4,7 +4,7 @@ import {
     action,
     autorun
 } from 'mobx';
-import {post} from '../utils/http';
+import {get, post} from '../utils/http';
 import Qs from 'qs';
 
 export default class AppState {
@@ -21,10 +21,6 @@ export default class AppState {
         this.user = user
     }
 
-    @computed get msg(){
-        return `${this.name} say count is ${this.count}`
-    }
-
     @action login(username, password) {  
         let param = new URLSearchParams()
         param.append('password', password)
@@ -32,16 +28,30 @@ export default class AppState {
             this.syncing = true
             post(`/user/${username}`, param)
                 .then(res=>{
+                    if(res.status === 0){
+                        this.user = res.data
+                        resolve()
+                    }else{
+                        reject(res.msg)
+                    }
+                }).catch(err => {
+                    console.log("errrrr")
+                    console.log(err)
+            })
+        })
+    } 
+
+    @action getUserInfo(){
+        return new Promise((resolve, reject)=>{
+            this.syncing = true
+            get(`/user`)
+                .then(res=>{
                     this.user = res.data
                     resolve()
                 }).catch(err => {
                     reject(err)
             })
         })
-    } 
-    @action getUserInfo(){
-        console.log(JSON.stringify(this.user)+'=-=-')
-        return this.user
     }
     toJson() {
         return {

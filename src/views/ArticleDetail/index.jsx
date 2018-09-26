@@ -2,20 +2,24 @@ import React from 'react';
 import { inject, observer } from 'mobx-react';
 
 @inject(stores => {
-    return{
-        articleStore: stores.articleStore,
-        appState: stores.appState
-    }
-})
-@observer
+    return { articleStore: stores.articleStore }
+})  @observer
 class ArticleDetail extends React.Component {
-    getComents() {
-        //TODO
+    componentDidMount() {
+        console.log('dids')
+        this.props.articleStore.fetchArticles({})
     }
+    // fetchArticles() {
+    //     console.log("000000"+this.props.articleStore.articles)
+    //     this.props.articleStore.fetchArticles({})
+    //     if(this.props.articleStore.articles === null) {
+    //         console.log("11111")
+    //         this.props.articleStore.fetchArticles({})
+    //     }
+    // }
 
     getArticle() {
         const id = this.props.match.params.id
-        console.log(id)
         return this.props.articleStore.detailsMap[id]
     }
 
@@ -24,11 +28,10 @@ class ArticleDetail extends React.Component {
         console.log(JSON.stringify(article)+'----')
         return(
             <div>
-                <p>{article.id}</p>
+                <p>{article.id }</p>
                 <p>{article.title}</p>
                 <p>{article.content}</p>
                 <hr/>
-
             </div>
         )
     }

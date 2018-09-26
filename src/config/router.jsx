@@ -11,6 +11,6 @@ import ArticleDetail from '../views/ArticleDetail';
 export default () => [
   // <Route path="/" render={() => <Redirect to="/list" />} exact key="first" />,
   <Route path="/" component={MainPage} exact/>,
-  <Route path="/detail/:id" component={ArticleDetail}/>,
+  <Route path="/detail/:id" component={ArticleDetail} exact/>,
   <Route path="/login" component={LoginPage} />
 ]

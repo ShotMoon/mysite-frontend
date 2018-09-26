@@ -36,8 +36,14 @@ class LoginPage extends React.Component {
   }
 
   handleLogin(){
-    this.props.appState.login(this.state.username, this.state.password)
-    this.props.history.push('/')
+    this.setState({ 
+      helpText: null 
+    })
+
+    this.props.appState.login(this.state.username, this.state.password).catch(msg=>{
+      this.setState({helpText:msg})
+    })
+    // this.props.history.go(-1)
   }
 
   handleInput(k, e){
@@ -95,7 +101,7 @@ class LoginPage extends React.Component {
                       </Button>
                     </div>
                   </CardHeader>
-                  <p className={classes.divider}>Or Be Classical</p>
+                  {this.state.helpText ? <p className={classes.divider}>{this.state.helpText}</p> : <p className={classes.divider}>Or Be Classical</p>}
                   <CardBody>
                     <CustomInput
                       labelText="User Name..."
