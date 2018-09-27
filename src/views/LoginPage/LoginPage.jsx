@@ -32,7 +32,7 @@ class LoginPage extends React.Component {
       username:'',
       password:''
     }
-    // this.handleInput = this.handleInput.bind(this)
+    
   }
 
   handleLogin(){
@@ -40,10 +40,11 @@ class LoginPage extends React.Component {
       helpText: null 
     })
 
-    this.props.appState.login(this.state.username, this.state.password).catch(msg=>{
+    this.props.appState.login(this.state.username, this.state.password).then(()=>{
+      this.props.history.go(-1)
+    }).catch(msg=>{
       this.setState({helpText:msg})
     })
-    // this.props.history.go(-1)
   }
 
   handleInput(k, e){

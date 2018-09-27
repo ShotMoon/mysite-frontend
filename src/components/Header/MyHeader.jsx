@@ -53,13 +53,13 @@ class SectionNavbars extends React.Component {
                   </ListItem>
                   <ListItem className={classes.listItem}>
                     <Button
-                      href="#pablo"
+                      // href="#pablo"
                       className={classes.navLink}
                       // onClick={e => e.preventDefault()}
-                      onClick={()=>this.getInfo()}
+                      // onClick={()=>{this.context.router.history.push('/login')}}
                       color="transparent"
                     >
-                      Hello,{user?user.username:'请登录'}
+                      {user?user.username:'please login'}
                     </Button>
                   </ListItem>
                   <ListItem className={classes.listItem}>

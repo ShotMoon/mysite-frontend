@@ -48,22 +48,6 @@ export class ArticleStore {
                 //   mdrender: false,
                 //   tab,
                 }).then(res => {
-                //     console.log(res.success)
-                //     console.log(JSON.stringify(res.data.content))
-                //   if (res.success) {
-                //     console.log('.........')
-                //     const articles = res.data.content.map(article => {
-                //       return new Article(createArticle(article))
-                //     })
-                //     console.log("aaaa"+JSON.stringify(articles))
-                //     this.articles = articles
-                //     this.syncing = false
-                //     resolve()his.syncing = false
-                //     resolve()
-                //   } else {
-                //     this.syncing = false
-                //     reject()
-                //   }
                     const articles = res.data.content.map(article => {
                       return new Article(createArticle(article))
                     })

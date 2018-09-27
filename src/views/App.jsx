@@ -14,12 +14,6 @@ import MyNavPills from 'components/NavPills/MyNavPills';
 import componentsStyle from "assets/jss/material-kit-react/views/components";
 import Routes from '../config/router';
 
-// Sections for this page
-
-
-const dashboardRoutes = [];
-
-// @inject('appState') @observer
 class App extends React.Component {
 
     asyncBootstrap() {

@@ -5,18 +5,9 @@ import { inject, observer } from 'mobx-react';
     return { articleStore: stores.articleStore }
 })  @observer
 class ArticleDetail extends React.Component {
-    componentDidMount() {
-        console.log('dids')
+    componentWillMount() {
         this.props.articleStore.fetchArticles({})
     }
-    // fetchArticles() {
-    //     console.log("000000"+this.props.articleStore.articles)
-    //     this.props.articleStore.fetchArticles({})
-    //     if(this.props.articleStore.articles === null) {
-    //         console.log("11111")
-    //         this.props.articleStore.fetchArticles({})
-    //     }
-    // }
 
     getArticle() {
         const id = this.props.match.params.id
@@ -25,14 +16,21 @@ class ArticleDetail extends React.Component {
 
     render() {
         const article = this.getArticle()
-        console.log(JSON.stringify(article)+'----')
+        const isSyncing = this.props.articleStore.syncing
+        
         return(
             <div>
-                <p>{article.id }</p>
-                <p>{article.title}</p>
-                <p>{article.content}</p>
-                <hr/>
-            </div>
+                { isSyncing ? (
+                    <span>jiazaizhong</span>
+                ):(
+                    <div>
+                        <p>{article.id }</p>
+                        <p>{article.title}</p>
+                        <p>{article.content}</p>
+                        <hr/>
+                    </div>
+                )}
+            </div>  
         )
     }
 }
