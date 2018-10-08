@@ -18,6 +18,8 @@ import Typography from '@material-ui/core/Typography';
 
 // core components
 import NavPills from "components/NavPills/NavPills.jsx";
+import GridContainer from "components/Grid/GridContainer.jsx";
+import GridItem from "components/Grid/GridItem.jsx";
 import pillsStyle from "assets/jss/material-kit-react/views/componentsSections/pillsStyle";
 
 //mobx
@@ -49,7 +51,9 @@ class MyNavPills extends React.Component {
     const syncing = this.props.articleStore.syncing
     return (
         <div className={classes.whole}>
-            <NavPills
+            <GridContainer>
+                <GridItem xs={12} sm={12} md={7}>
+                <NavPills
                 color="primary"
                 tabs={[
                 {
@@ -57,23 +61,21 @@ class MyNavPills extends React.Component {
                     tabIcon: Dashboard,
                     tabContent: (
                         articles.map(article => 
-                            (<Card className={classes.card} onClick={()=>{this.toDetail(article)}}>
-                                <CardActionArea>
-                                    <CardMedia
-                                        className={classes.media}
-                                        // image="/static/images/cards/contemplative-reptile.jpg"
-                                        title="Contemplative Reptile"
-                                    />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="headline" component="h2">
-                                            {article.title}
-                                        </Typography>
-                                        <Typography component="p">
-                                            {article.content}
-                                        </Typography>
-                                    </CardContent>
-                                </CardActionArea>
-                            </Card>)
+                            (<div>
+                                <Card className={classes.card} onClick={()=>{this.toDetail(article)}}>
+                                    <CardActionArea>
+                                        <CardContent>
+                                            <Typography gutterBottom variant="headline" component="h2">
+                                                {article.title}
+                                            </Typography>
+                                            <Typography component="p">
+                                                {article.content}
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                                <br />
+                            </div>)
                         )
                     )
                 },
@@ -131,7 +133,15 @@ class MyNavPills extends React.Component {
                 }
                 ]}
                 
-            />
+                />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={5}>
+                    <div>
+                        <h1>other</h1>
+                    </div>
+                </GridItem>
+            </GridContainer>
+            
             {
                 syncing ?
                     (

@@ -13,6 +13,7 @@ const pillsStyle = {
   },
   whole: {
     padding: "5px",
+    margin: "0px 5%"
   }
 };
 

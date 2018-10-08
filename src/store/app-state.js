@@ -21,6 +21,23 @@ export default class AppState {
         this.user = user
     }
 
+    @action register(username, password) {
+        return new Promise((resolve, reject)=>{
+            this.syncing = true
+            post(`/user`, {username, password})
+                .then(res=>{
+                    if(res.status === 0){
+                        this.user = res.data
+                        resolve()
+                    }else{
+                        reject(res.msg)
+                    }
+                }).catch(err => {
+                    console.log(err)
+            })
+        }) 
+    }
+
     @action login(username, password) {  
         let param = new URLSearchParams()
         param.append('password', password)
@@ -30,12 +47,12 @@ export default class AppState {
                 .then(res=>{
                     if(res.status === 0){
                         this.user = res.data
+                        console.log(JSON.stringify(this.user)+'----------')
                         resolve()
                     }else{
                         reject(res.msg)
                     }
                 }).catch(err => {
-                    console.log("errrrr")
                     console.log(err)
             })
         })

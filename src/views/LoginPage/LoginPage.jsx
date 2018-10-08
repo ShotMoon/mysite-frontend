@@ -18,7 +18,7 @@ import CustomInput from "components/CustomInput/CustomInput.jsx";
 //mobx
 import { inject, observer } from 'mobx-react';
 
-import loginStyle from "assets/jss/material-kit-react/views/componentsSections/loginStyle.jsx";
+import loginStyle from "assets/jss/material-kit-react/views/componentsSections/loginStyle";
 
 @inject(stores=>{
   return {appState: stores.appState}
@@ -32,16 +32,26 @@ class LoginPage extends React.Component {
       username:'',
       password:''
     }
-    
+  }
+
+  clearErrorMsg() {
+    this.setState({helpText: ''})
   }
 
   handleLogin(){
-    this.setState({ 
-      helpText: null 
-    })
+    this.clearErrorMsg()
+
+    if(this.state.username === '') {
+      this.setState({helpText: '用户名不能为空'})
+      return
+    }
+    if(this.state.password === '') {
+      this.setState({helpText: '密码不能为空'})
+      return
+    }
 
     this.props.appState.login(this.state.username, this.state.password).then(()=>{
-      this.props.history.go(-1)
+      this.props.history.push('/')
     }).catch(msg=>{
       this.setState({helpText:msg})
     })
@@ -51,6 +61,10 @@ class LoginPage extends React.Component {
     this.setState({
       [k]: e.target.value
     })
+  }
+
+  toRegister() {
+    this.props.history.push('/register')
   }
 
   render() {
@@ -142,7 +156,10 @@ class LoginPage extends React.Component {
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
                     <Button simple color="primary" size="lg" onClick={()=>this.handleLogin()}>
-                      Get started
+                      Login
+                    </Button>
+                    <Button simple color="primary" size="lg" onClick={()=>this.toRegister()}>
+                      没有账号，注册
                     </Button>
                   </CardFooter>
                 </form>

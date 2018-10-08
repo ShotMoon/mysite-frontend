@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom'
 
 import MainPage from '../views/MainPage/MainPage';
+import Register from '../views/Register/Register';
 import LoginPage from '../views/LoginPage/LoginPage';
 import ArticleDetail from '../views/ArticleDetail';
 
@@ -12,5 +13,6 @@ export default () => [
   // <Route path="/" render={() => <Redirect to="/list" />} exact key="first" />,
   <Route path="/" component={MainPage} exact/>,
   <Route path="/detail/:id" component={ArticleDetail} exact/>,
+  <Route path="/register" component={Register} />,
   <Route path="/login" component={LoginPage} />
 ]
